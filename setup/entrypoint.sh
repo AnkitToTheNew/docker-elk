@@ -57,7 +57,7 @@ fi
 
 sublog 'Elasticsearch is running'
 
-log 'Waiting for initialization of built-in users'
+# log 'Waiting for initialization of built-in users'
 
 # wait_for_builtin_users || exit_code=$?
 
@@ -104,4 +104,4 @@ log 'Waiting for initialization of built-in users'
 # 		sublog 'User does not exist, creating'
 # 		create_user "$user" "${users_passwords[$user]}" "${users_roles[$user]}"
 # 	fi
-# done
+done
