@@ -36,7 +36,7 @@ services:
       - '50000:50000'
     user: jenkins:jenkins
     volumes: 
-      - jenkins-data:/var/jenkins_home
+      - jenkins_data/var/jenkins_home
       - jenkins-docker-certs:/certs/client:ro
       - ./jenkins/jenkins-config.yaml:/var/casc_configs/jenkins-config.yaml:ro
       - /var/run/docker.sock:/var/run/docker.sock
