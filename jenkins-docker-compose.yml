@@ -22,7 +22,7 @@ services:
       - '2376:2376'
 
   jenkins:
-    image: jenkins-blueocean
+    image: jenkins/jenkins:2.440.2-lts-jdk17
     build:
       context: ./jenkins
       dockerfile: Dockerfile
