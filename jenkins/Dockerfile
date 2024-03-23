@@ -18,7 +18,7 @@ RUN chown -R jenkins:jenkins /var/jenkins_home
 
 USER jenkins
 
-COPY --chown=jenkins:jenkins ./jenkins/plugins.yaml /usr/share/jenkins/ref/plugins.yaml
+COPY --chown=jenkins:jenkins ./plugins.yaml /usr/share/jenkins/ref/plugins.yaml
 RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.yaml
 RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
 
