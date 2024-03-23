@@ -2,15 +2,58 @@ version: '2'
 
 services:
 
-  jenkins:
-    image: jenkins/jenkins:2.440.2-lts-jdk17
+  docker-agent:
+    image: docker:dind
+    depends_on: 
+      - jenkins
+    restart: unless-stopped
+    privileged: true
+    command: --storage-driver=overlay2
+    networks: 
+      sonarnet:
+        aliases: 
+          - docker
+    environment: 
+      DOCKER_TLS_CERTDIR: /certs
     volumes:
-       - jenkins_data:/var/jenkins_home
-    networks:
-      - sonarnet
+      - jenkins-docker-certs:/certs/client
+      - jenkins-data:/var/jenkins_home
+    ports:
+      - '2376:2376'
+
+  jenkins:
+    image: jenkins-blueocean
+    build:
+      context: ./jenkins
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      DOCKER_HOST: tcp://docker:2376
+      DOCKER_CERT_PATH: /certs/client
+      DOCKER_TLS_VERIFY: 1
     ports:
       - '8080:8080'
       - '50000:50000'
+    user: jenkins:jenkins
+    volumes: 
+      - jenkins-data:/var/jenkins_home
+      - jenkins-docker-certs:/certs/client:ro
+      - ./jenkins/jenkins-config.yaml:/var/casc_configs/jenkins-config.yaml:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks: 
+      - sonarnet
+
+
+
+  # jenkins:
+  #   image: jenkins/jenkins:2.440.2-lts-jdk17
+  #   volumes:
+  #      - jenkins_data:/var/jenkins_home
+  #   networks:
+  #     - sonarnet
+  #   ports:
+  #     - '8080:8080'
+  #     - '50000:50000'
 
   sonarqube:
     image: sonarqube:latest 
@@ -65,3 +108,4 @@ volumes:
   postgresql_data:
   jenkins_data:
   pgadmin-data:
+  jenkins-docker-certs:
