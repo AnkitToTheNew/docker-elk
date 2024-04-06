@@ -1,2 +1,10 @@
+# plugins:
+#   - git
+
+# plugins:
+#   - artifactId: git
+
 plugins:
-  - artifactId: git
+  - name: git
+    dependencies:
+      - pipelines
