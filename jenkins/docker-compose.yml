@@ -37,7 +37,7 @@ services:
     volumes: 
       - jenkins_data:/var/jenkins_home
       - jenkins-docker-certs:/certs/client:ro
-      - ./jenkins/jenkins-config.yaml:/var/casc_configs/jenkins-config.yaml:ro
+      - jenkins-config:/var/casc_configs/:ro
       - /var/run/docker.sock:/var/run/docker.sock
     networks: 
       - sonarnet
@@ -96,3 +96,4 @@ volumes:
   jenkins_data:
   pgadmin-data:
   jenkins-docker-certs:
+  jenkins-config:
