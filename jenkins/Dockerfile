@@ -21,8 +21,5 @@ USER jenkins
 COPY --chown=jenkins:jenkins plugins.yml /usr/share/jenkins/plugins.yml
 RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/plugins.yml
 
-# COPY --chown=jenkins:jenkins /testing/ /var/casc_configs/testing/
-# ENV  CASC_JENKINS_CONFIG=/var/casc_configs/testing
-
 COPY --chown=jenkins:jenkins jenkins-config.yaml /var/casc_configs/jenkins-config.yaml
 ENV  CASC_JENKINS_CONFIG=/var/casc_configs/jenkins-config.yaml
