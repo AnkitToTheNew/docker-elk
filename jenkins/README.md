@@ -62,5 +62,11 @@ sudo docker-compose up -d
 * Default username and password for SonarQube: sonar / sonar
 * JDBC settings in docker-compose.yml  
 
+## Networking
+All services connected to the sonarnet bridge network for communication.
+
+## Volumes
+Volumes defined for persistent storage of Jenkins data, SonarQube configuration, SonarQube data, PostgreSQL data, pgAdmin data, and Docker certificates.
+
 ## License
 This project is licensed under the MIT License.

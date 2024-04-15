@@ -63,6 +63,9 @@ sudo docker-compose up -d
 
 * Data volume: grafana
 
+## Networking
+The services are connected to the elk bridge network for communication.
+
 ## Monitoring
 
 * Log aggregation and analysis: Elasticsearch, Logstash, Kibana
